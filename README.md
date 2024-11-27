@@ -1,2 +1,4 @@
-# event_orin_drone
-event-orin drone overview repository
+# Event-Orin drone
+
+Overview repository for the Event-Orin drone.
+
