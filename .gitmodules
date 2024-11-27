@@ -1,0 +1,4 @@
+[submodule "fc/PX4-Autopilot"]
+	path = fc/PX4-Autopilot
+	url = git@github.com:tudelft/PX4-Autopilot.git
+	branch = dequan
