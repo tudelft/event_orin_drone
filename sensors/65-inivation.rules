@@ -1,0 +1,11 @@
+# All DVS/DAVIS cameras
+SUBSYSTEM=="usb", ATTR{idVendor}=="152a", ATTR{idProduct}=="84[0-1]?", MODE="0666", GROUP="video", TAG+="uaccess", TAG+="udev-acl"
+# eDVS 4337
+SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6014", MODE="0666", GROUP="video", TAG+="uaccess", TAG+="udev-acl"
+# Standard FX3 devices (EVK)
+SUBSYSTEM=="usb", ATTR{idVendor}=="04b4", ATTR{idProduct}=="00f1", MODE="0666", GROUP="video", TAG+="uaccess", TAG+="udev-acl"
+# Blank FX2 devices
+SUBSYSTEM=="usb", ATTR{idVendor}=="04b4", ATTR{idProduct}=="8613", MODE="0666", GROUP="plugdev", TAG+="uaccess", TAG+="udev-acl"
+# Blank FX3 devices
+SUBSYSTEM=="usb", ATTR{idVendor}=="04b4", ATTR{idProduct}=="0053", MODE="0666", GROUP="plugdev", TAG+="uaccess", TAG+="udev-acl"
+SUBSYSTEM=="usb", ATTR{idVendor}=="04b4", ATTR{idProduct}=="00f3", MODE="0666", GROUP="plugdev", TAG+="uaccess", TAG+="udev-acl"
