@@ -6,6 +6,8 @@ Overview repository for the Event-Orin drone.
 git clone --recurse-submodules git@github.com:tudelft/event_orin_drone.git
 ```
 
+Or without `--recurse-submodules` if you don't need PX4 etc.
+
 ## Repository structure
 
 Airborne stuff:
