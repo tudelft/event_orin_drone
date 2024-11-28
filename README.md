@@ -3,7 +3,7 @@
 Overview repository for the Event-Orin drone.
 
 ```bash
-git clone --recurse_submodules git@github.com:tudelft/event_orin_drone.git
+git clone --recurse-submodules git@github.com:tudelft/event_orin_drone.git
 ```
 
 ## Repository structure
