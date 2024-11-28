@@ -2,7 +2,6 @@
 
 ## from https://github.com/tudelft/dronerace/blob/master/orin/configure_orin.sh
 ## Download & install wifi drivers
-cd ~
 wget https://cdn.kernel.org/pub/linux/kernel/projects/backports/stable/v5.15.153/backports-5.15.153-1.tar.xz
 tar Jxfv  backports-5.15.153-1.tar.xz 
 cd backports-5.15.153-1
