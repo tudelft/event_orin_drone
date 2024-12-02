@@ -54,7 +54,19 @@ Tested on:
 
 ### Drone
 
-**TODO: add full parts list**
+| **Component**               | **Product**                                            | **Mass [g]** | **Approx. power [W]** |
+|-----------------------------|--------------------------------------------------------|-------------:|----------------------:|
+| Frame                       | Armattan Marmotte 5 inch                               |          455 |                   200 |
+| Motors                      | Emax ECO II Series 2306                                |              |                       |
+| Propellers                  | Ethix S5 5 inch                                        |              |                       |
+| Flight controller           | Holybro Kakute H7 Mini                                 |              |                       |
+| Optical flow & range sensor | MicoAir MTF-01                                         |              |                       |
+| ESC                         | Holybro Tekko32 F4 4in1 mini 50A BL32                  |              |                       |
+| Battery                     | iFlight Fullsend 4S 3000mAh Li-Ion                     |          208 |                     - |
+| On-board compute            | NVIDIA Jetson Orin NX 16GB & DAMIAO v1.1 carrier board |           62 |                     9 (`jtop`) |
+| Event camera                | iniVation DVXplorer Micro                              |           22 |               [max 0.7](https://docs.inivation.com/_static/hardware_guides/dvxplorer-micro.pdf) |
+| Stereo camera               | Intel RealSense D435i                                  |           75 |               [max 3.5](https://www.intelrealsense.com/wp-content/uploads/2024/10/Intel-RealSense-D400-Series-Datasheet-October-2024.pdf) |
+| **Total**                   | -                                                      |          822 |                 213.2 |
 
 ### Orin
 
