@@ -49,6 +49,7 @@ Tested on:
         - Doesn't always work?
         - No DFU mode, no expert mode, [.hex bootloader file](fc/holybro_kakuteh7mini_bootloader.hex)
     - Build firmware: `make holybro_kakuteh7mini_default` (file [here](fc/holybro_kakuteh7mini_default.px4))
+        - Note: this will fail if the correct tags are not checked out in the PX4 repo; to do so, run `git remote add upstream git@github.com:PX4/PX4-Autopilot.git && git fetch upstream && git fetch upstream --tags && git push --tags` following [this](https://github.com/PX4/PX4-Autopilot/issues/21644)
     - Flash with QGroundControl
     - Upload [parameter file](fc/event-orin.params)
 
