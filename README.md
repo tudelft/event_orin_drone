@@ -216,15 +216,14 @@ If you want to run simulations with PX4 and Gazebo and ROS2:
 
 ### Wifi
 
-- Tailscale
+- Antenna sticking out of the drone for better range
+- Use Tailscale in combination with a hotspot
     - Fixed some problems: [this](https://tailscale.com/kb/1188/linux-dns)
-    - Unstable? Sometimes doesn't work and need reboot
     - eduroam seems too high latency?
 - Key-only SSH, no root login
-- Hotspot on laptop or phone
+- Hotspot on laptop or phone (Windows: set to 2.4 GHz to maximize range)
 
-**TODO: how to get W11 hotspot working with WSL and Orin?**
-- Maybe setup hotspot on Orin? `event-orin-drone`/`mavlabcool`
+**TODO: allow WSL to connect to drone without Tailscale (mirrored networking mode?), so we can have the OptiTrack client running on the laptop (else we need Zenoh bridge)**
 
 ### Radio
 
