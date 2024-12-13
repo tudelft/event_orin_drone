@@ -96,11 +96,11 @@ Tested on:
     - Run [`configure_orin.sh`](orin/configure_orin.sh) as `cd orin && sudo ./configure_orin.sh`
     - Fixes wifi
         - Better version of [this](https://forums.developer.nvidia.com/t/jetpack-6-wifi-does-not-work-with-intel-ac-9260/292424)?
-    - Sets fan to max on boot (better performance)
+    - Sets fan to max on boot and MAXN power mode (0, [best performance[(https://docs.nvidia.com/jetson/archives/r36.3/DeveloperGuide/SD/PlatformPowerAndPerformance/JetsonOrinNanoSeriesJetsonOrinNxSeriesAndJetsonAgxOrinSeries.html#supported-modes-and-power-efficiency)])
 - Enable extra UART following [these](https://forums.developer.nvidia.com/t/orin-nano-jetpack-6-0-uart1-issue/299825/8) [posts](https://forums.developer.nvidia.com/t/issue-with-enabling-uartb-serial-3110000-on-orin-nx-with-l4t-36-3/297052):
   - Decompile dtb to dts with `sudo dtc -I dtb -O dts A.dtb > A.dts`, modify, then recompile with `sudo dtc -I dts -O dtb A.dts > A.dtb`
   - Put in `/boot/dtb`, then specify the file in `/boot/extlinux/extlinux.conf` as in the posts, then reboot
-- Install `jtop` ([instructions](https://github.com/rbonghi/jetson_stats))
+- **DONT** install `jtop` ([instructions](https://github.com/rbonghi/jetson_stats)), this messes with the max fan above
 - Check RTC: [here](https://ubuntu.com/core/docs/system-time)
 - UARTs:
     - FC `telem1` (connector on FC) -> `/dev/ttyTHS1`: UART closest to carrier board edge

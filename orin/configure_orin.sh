@@ -30,6 +30,6 @@ ExecStart=/usr/local/bin/set_fan_to_max.sh
 WantedBy=default.target">>/lib/systemd/system/set_fan_to_max.service
 sudo systemctl daemon-reload
 sudo systemctl enable set_fan_to_max.service
-sudo nvpmodel -m 3
+sudo nvpmodel -m 0
 
 echo "!!!!!! Make sure to shutdown and then start after this, restart is not the same as shutdown apparently !!!!"
