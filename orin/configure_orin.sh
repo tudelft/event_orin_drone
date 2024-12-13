@@ -16,4 +16,20 @@ sudo sed -i -e 's/wifi.powersave = 3/wifi.powersave = 2/g' /etc/NetworkManager/c
 ## disable bluetooth 
 sudo sed -i -e 's/AutoEnable=true/AutoEnable=false/g' /etc/bluetooth/main.conf
 
-## don't set fan to max
+## set fan to max on boot
+sudo echo "#!/bin/bash
+jetson_clocks --fan" >>/usr/local/bin/set_fan_to_max.sh
+sudo chmod +x /usr/local/bin/set_fan_to_max.sh
+sudo echo "[Unit]
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/set_fan_to_max.sh
+
+[Install]
+WantedBy=default.target">>/lib/systemd/system/set_fan_to_max.service
+sudo systemctl daemon-reload
+sudo systemctl enable set_fan_to_max.service
+sudo nvpmodel -m 3
+
+echo "!!!!!! Make sure to shutdown and then start after this, restart is not the same as shutdown apparently !!!!"

@@ -92,9 +92,11 @@ Tested on:
 - Update everything in GUI and with `apt update` (but don't yet `autoremove`)
 - `hostnamectl set-hostname event-orin-drone`
 - Configure wifi using `nmtui` or connect over ethernet for now (make sure to set to 'share to local' on Ubuntu)
-- Fix wifi:
-    - Run [`fix_wifi_till.sh`](orin/fix_wifi_till.sh) as `cd orin && sudo ./fix_wifi_till.sh`
-    - Better version of [this](https://forums.developer.nvidia.com/t/jetpack-6-wifi-does-not-work-with-intel-ac-9260/292424)?
+- Configure orin:
+    - Run [`configure_orin.sh`](orin/configure_orin.sh) as `cd orin && sudo ./configure_orin.sh`
+    - Fixes wifi
+        - Better version of [this](https://forums.developer.nvidia.com/t/jetpack-6-wifi-does-not-work-with-intel-ac-9260/292424)?
+    - Sets fan to max on boot (better performance)
 - Enable extra UART following [these](https://forums.developer.nvidia.com/t/orin-nano-jetpack-6-0-uart1-issue/299825/8) [posts](https://forums.developer.nvidia.com/t/issue-with-enabling-uartb-serial-3110000-on-orin-nx-with-l4t-36-3/297052):
   - Decompile dtb to dts with `sudo dtc -I dtb -O dts A.dtb > A.dts`, modify, then recompile with `sudo dtc -I dts -O dtb A.dts > A.dtb`
   - Put in `/boot/dtb`, then specify the file in `/boot/extlinux/extlinux.conf` as in the posts, then reboot
