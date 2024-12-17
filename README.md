@@ -107,6 +107,9 @@ Tested on:
         - MAVLink Router
     - FC `telem2` (soldered on FC) -> `/dev/ttyTHS3`: UART closest to center of carrier board
         - uXRCE agent to ROS
+    - For both, we'll use a baudrate of 3000000 (PX4 max, see [here](https://docs.px4.io/main/en/advanced_config/parameter_reference.html#SER_TEL1_BAUD))
+        - No need to set it here, but be sure that the UART port/wires can support this
+        - If too much, use something like 921600
 
 #### `jetson-containers`
 
@@ -202,12 +205,13 @@ If you want to run simulations with PX4 and Gazebo and ROS2:
 - Put [config](comms/mavlink-router.conf) (from [here](https://bellergy.com/6-install-and-setup-mavlink-router/)) in `/etc/mavlink-router/main.conf`
 - Run as `mavlink-routerd`
 - Make sure to set up a TCP comms link in QGroundControl pointing to `orin-ip:5760`
+- Use max PX4 baudrate (3000000)
 
 #### uXRCE agent
 
 - For communication between PX4 and ROS2
 - Install following [this](https://micro-xrce-dds.docs.eprosima.com/en/latest/installation.html#installation-from-snap-package) using `snap`
-- Run as `micro-xrce-dds-agent serial --dev /dev/ttyTHS3 -b 921600`
+- Run as `micro-xrce-dds-agent serial --dev /dev/ttyTHS3 -b 3000000` (match highest baudrate on PX4)
 
 #### PX4-ROS2
 
