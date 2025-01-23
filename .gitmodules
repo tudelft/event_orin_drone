@@ -1,4 +1,12 @@
 [submodule "fc/PX4-Autopilot"]
 	path = fc/PX4-Autopilot
 	url = git@github.com:tudelft/PX4-Autopilot.git
-	branch = dequan
+[submodule "ros/src/px4-ros2-interface-lib"]
+	path = ros/src/px4-ros2-interface-lib
+	url = git@github.com:tudelft/px4-ros2-interface-lib.git
+[submodule "ros/src/px4_msgs"]
+	path = ros/src/px4_msgs
+	url = git@github.com:PX4/px4_msgs.git
+[submodule "ros/src/rosbag2_composable_recorder"]
+	path = ros/src/rosbag2_composable_recorder
+	url = git@github.com:berndpfrommer/rosbag2_composable_recorder.git
