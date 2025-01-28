@@ -16,7 +16,7 @@ function ros_source_env()
 
 # source local ros install if present
 ros_source_env "${ROS_ROOT}/setup.bash"
-ros_source_env "ros/install/setup.bash"
+ros_source_env "install/setup.bash"
 
 # prepend correct realsense libs to LD_LIBRARY_PATH after sourcing ros
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
