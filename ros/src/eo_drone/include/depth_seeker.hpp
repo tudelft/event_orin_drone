@@ -20,7 +20,7 @@
 
 using namespace px4_ros2::literals;  // NOLINT
 
-static const std::string kName = "Depth Seeker";
+static const std::string kName = "Depth Seeker";  // goes to mode id 23 so ext1
 
 class DepthSeekerMode : public px4_ros2::ModeBase
 {
