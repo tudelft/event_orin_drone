@@ -20,11 +20,7 @@ using namespace px4_ros2::literals;  // NOLINT
 class FlySquareMode : public px4_ros2::ModeBase
 {
 public:
-  explicit FlySquareMode(rclcpp::Node & node)
-  : ModeBase(node, kName)
-  // : ModeBase(node, Settings{kName, false, px4_msgs::msg::VehicleStatus::NAVIGATION_STATE_EXTERNAL1})  // why doesn't this work?
-  // : ModeBase(node, Settings{kName, false, px4_msgs::msg::VehicleStatus::NAVIGATION_STATE_AUTO_MISSION})  // why DOES this work?
-  // : ModeBase(node, Settings{kName, false, px4_msgs::msg::VehicleStatus::NAVIGATION_STATE_EXTERNAL3})  // why DOES this work if it's also being registered as 3?
+  explicit FlySquareMode(rclcpp::Node & node) : ModeBase(node, kName)
   {
     _goto_setpoint = std::make_shared<px4_ros2::GotoSetpointType>(*this);
     _vehicle_local_position = std::make_shared<px4_ros2::OdometryLocalPosition>(*this);

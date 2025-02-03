@@ -16,9 +16,12 @@ find_package(std_msgs REQUIRED)
 include_directories(include ${Eigen3_INCLUDE_DIRS})
 add_executable(fly_square src/fly_square.cpp)
 ament_target_dependencies(fly_square Eigen3 px4_ros2_cpp rclcpp)
+add_executable(depth_seeker src/depth_seeker.cpp)
+ament_target_dependencies(depth_seeker std_msgs Eigen3 px4_ros2_cpp rclcpp)
 
 install(TARGETS
   fly_square
+  depth_seeker
   DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY

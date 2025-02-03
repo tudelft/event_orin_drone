@@ -9,6 +9,13 @@
 
   <!-- ROS2 dependencies -->
   <depend>sensor_msgs</depend>
+  <depend>cv_bridge</depend>
+  <depend>image_transport</depend>
+
+  <!-- OpenCV dependency -->
+  <!-- ignore opencv for now; put python-opencv later? -->
+  <!-- <build_depend>opencv4</build_depend>
+  <exec_depend>opencv4</exec_depend> -->
 
   <!-- buildtool dependencies at build time -->
   <buildtool_depend>eigen3_cmake_module</buildtool_depend>

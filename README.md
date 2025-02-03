@@ -25,8 +25,11 @@ Communication stuff:
 - [wifi](#wifi): wifi setup
 - [radio](#radio): radio transmitter setup
 
+ROS:
+- [ros](#ros): ROS2 setup and config
+
 Misc:
-- [scripts](#scripts): some useful scripts
+- [scripts](#scripts): some useful scripts for real-world flight
 
 If a folder/link doesn't exist, there's nothing there (yet).
 
@@ -248,6 +251,12 @@ If you want to run simulations with PX4 and Gazebo and ROS2:
     - Also check receiver via 'other devices' (?)
 - Disable auto wifi interval: see [this](https://github.com/ExpressLRS/ExpressLRS/issues/1797) (annoying)
 
+### ROS
+
+- Contains ROS2 workspace, and script [build_ros2.sh](ros/build_ros.sh) to build ROS2 packages
+- See [sim](#sim) for PX4-ROS2 setup
+
 ### Scripts
 
+- [`drone_flight.sh`](scripts/drone_flight.sh): start all necessary windows/services for real flight
 - [`move_logs_to_drive.sh`](scripts/move_logs_to_drive.sh): mount USB stick, move logs, unmount
