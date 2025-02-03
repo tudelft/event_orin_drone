@@ -273,6 +273,7 @@ If you want to run simulations with PX4 and Gazebo and ROS2:
 - Fly around (in position or stabilized mode) and land
 - Stop the rosbag recording, close all windows
 - Put USB stick in Orin, check its UUID, then modify/run [move_logs_to_drive.sh](scripts/move_logs_to_drive.sh) to move the logs to the USB stick
+- Read using [Foxglove](https://foxglove.dev/) or convert to H5
 
 ### Testing external flight modes in simulation
 
@@ -280,6 +281,12 @@ If you want to run simulations with PX4 and Gazebo and ROS2:
 - Run [sim/px4_gazebo_sim_example.sh](sim/px4_gazebo_sim_example.sh) to start PX4 and Gazebo simulation
     - If you don't end up with 4 tmux windows, something went wrong, so check the commands in normal terminals to see the error messages
 - You can connect a joystick with QGroundControl but it's not necessary, set up comms link to WSL as explained [here](https://docs.px4.io/main/en/dev_setup/dev_env_windows_wsl.html#qgroundcontrol-on-windows)
+- In the PX4 terminal:
+    - `commander status` to see if custom mode is registered
+    - `commander takeoff` to take off
+    - `commander mode ext1` to start the depth seeker, which should avoid the walls
+    - `commander mode auto:loiter` to hover again, or `commander mode posctl` to control using the sticks
+    - `commander mode ext1` to start flying a square autonomously
 
 ### Using a neural network for control
 
