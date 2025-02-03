@@ -120,7 +120,7 @@ Tested on:
 - Build base image with e.g. `jetson-containers build --name event-orin cuda:12.2 pytorch:2.4 openai-triton:3.0.0`
 - Check versions of installed packages, so you can get pre-built binaries from [here](http://jetson.webredirect.org/jp6/cu122)
 - When running a container, it's nice to create a user with the same UID/GID inside, and use that, so not all folders will end up being owned by root: `jetson-containers run -v .:/workspace --user $(id -u):$(id -g) <container_name>`
-- Example script for drone flight: see [here](orin/drone_flight.sh)
+- Example script for drone flight: see [here](scripts/drone_flight.sh)
 
 ### Sensors
 
@@ -195,7 +195,7 @@ If you want to run simulations with PX4 and Gazebo and ROS2:
     - Run with `snap run micro-xrce-dds-agent udp4 -p 8888`
 - Connect radio as joystick, calibrate in Windows/QGroundControl
     - Joystick buttons: some issue [here](https://github.com/mavlink/qgroundcontrol/issues/4520)
-- Simulation with depth camera messages sent to ROS2: [`sim/px4_gazebo_sim_depth.sh`](sim/px4_gazebo_sim_depth.sh)
+- Simulation with depth camera messages sent to ROS2: [`sim/px4_gazebo_sim_example.sh`](sim/px4_gazebo_sim_example.sh)
 - If you need it to work with a container, set `--ipc=host` following [this](https://github.com/eProsima/Fast-DDS/issues/2956)
 
 ### Comms
@@ -207,7 +207,7 @@ If you want to run simulations with PX4 and Gazebo and ROS2:
     - Make sure to add user to `dialout` and `tty` as [here](https://unix.stackexchange.com/questions/14354/read-write-to-a-serial-port-without-root)
 - Put [config](comms/mavlink-router.conf) (from [here](https://bellergy.com/6-install-and-setup-mavlink-router/)) in `/etc/mavlink-router/main.conf`
 - Run as `mavlink-routerd`
-- Make sure to set up a TCP comms link in QGroundControl pointing to `orin-ip:5760`
+- Make sure to set up a TCP comms link in QGroundControl pointing to `<orin-ip-address:5760`
 - Use max PX4 baudrate (3000000)
 
 #### uXRCE agent
@@ -260,3 +260,27 @@ If you want to run simulations with PX4 and Gazebo and ROS2:
 
 - [`drone_flight.sh`](scripts/drone_flight.sh): start all necessary windows/services for real flight
 - [`move_logs_to_drive.sh`](scripts/move_logs_to_drive.sh): mount USB stick, move logs, unmount
+
+## Examples
+
+### Collecting data while flying
+
+- Make sure containers, ROS, etc. are all built on the Orin
+- Run [drone_flight.sh](scripts/drone_flight.sh) on the Orin (connect over SSH) to start all necessary services
+- Connect to your local QGroundControl by setting up a comms link in QGroundControl (under application settings -> comm links) pointing to `<orin-ip-address>:5760` over TCP
+- Make sure flight modes are set correctly in QGroundControl
+- Then do `ros2 launch eo_drone drone_flight_recorder.launch.py` on the Orin to start recording events and flight controller stuff to a rosbag
+- Fly around (in position or stabilized mode) and land
+- Stop the rosbag recording, close all windows
+- Put USB stick in Orin, check its UUID, then modify/run [move_logs_to_drive.sh](scripts/move_logs_to_drive.sh) to move the logs to the USB stick
+
+### Testing external flight modes in simulation
+
+- Make sure containers, ROS, etc. are all built locally
+- Run [sim/px4_gazebo_sim_example.sh](sim/px4_gazebo_sim_example.sh) to start PX4 and Gazebo simulation
+    - If you don't end up with 4 tmux windows, something went wrong, so check the commands in normal terminals to see the error messages
+- You can connect a joystick with QGroundControl but it's not necessary, set up comms link to WSL as explained [here](https://docs.px4.io/main/en/dev_setup/dev_env_windows_wsl.html#qgroundcontrol-on-windows)
+
+### Using a neural network for control
+
+WIP
