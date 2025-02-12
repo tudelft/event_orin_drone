@@ -110,7 +110,7 @@ Tested on:
         - MAVLink Router
     - FC `telem2` (soldered on FC) -> `/dev/ttyTHS3`: UART closest to center of carrier board
         - uXRCE agent to ROS
-    - For both, we'll use a baudrate of 3000000 (PX4 max, see [here](https://docs.px4.io/main/en/advanced_config/parameter_reference.html#SER_TEL1_BAUD))
+    - For `telem2`, we'll use a baudrate of 3000000 (PX4 max, see [here](https://docs.px4.io/main/en/advanced_config/parameter_reference.html#SER_TEL1_BAUD)); for `telem1`, we'll use 921600 (else we got issues when controlling offboard)
         - No need to set it here, but be sure that the UART port/wires can support this
         - If too much, use something like 921600
 
@@ -208,7 +208,7 @@ If you want to run simulations with PX4 and Gazebo and ROS2:
 - Put [config](comms/mavlink-router.conf) (from [here](https://bellergy.com/6-install-and-setup-mavlink-router/)) in `/etc/mavlink-router/main.conf`
 - Run as `mavlink-routerd`
 - Make sure to set up a TCP comms link in QGroundControl pointing to `<orin-ip-address:5760`
-- Use max PX4 baudrate (3000000)
+- Use sufficient baudrate (but not max PX4, this gives issues); we found 921600 to work well
 
 #### uXRCE agent
 
