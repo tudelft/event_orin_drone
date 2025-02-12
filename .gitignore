@@ -1,4 +1,5 @@
-ros/build/
-ros/install/
-ros/log/
-ros/rosbags/
+__pycache__/
+build/
+install/
+log/
+rosbags/

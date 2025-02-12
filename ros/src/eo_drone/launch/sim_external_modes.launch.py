@@ -9,13 +9,20 @@ def generate_launch_description():
         executable="fly_square",
         name="fly_square",
         output="screen",
+        parameters=[{"navigation_state": "ext2"}],
     )
     depth_seeker_node = Node(
         package="eo_drone",
         executable="depth_seeker",
-        name="depth_seeker",
+        name="depth_seeker",  # change name to avoid conflicts when starting multiple
         output="screen",
-        parameters=[{"max_yaw_rate": 0.5}],  # rad/s
+        parameters=[
+            {
+                "mode_name": "DS Depth Camera",
+                "navigation_state": "ext1",
+                "max_yaw_rate": 0.5,  # rad/s
+            }
+        ],
         remappings=[("~/avg_inv_depth", "/depth_to_bins/avg_inv_depth")],  # to, from
     )
     depth_to_bins_container = ComposableNodeContainer(

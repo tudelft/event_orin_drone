@@ -20,13 +20,11 @@
 
 using namespace px4_ros2::literals;  // NOLINT
 
-static const std::string kName = "Depth Seeker";  // goes to mode id 23 so ext1
-
 class DepthSeekerMode : public px4_ros2::ModeBase
 {
 public:
   explicit DepthSeekerMode(rclcpp::Node & node)
-  : ModeBase(node, kName),
+  : ModeBase(node, Settings{getName(node), false, static_cast<px4_ros2::ModeBase::ModeID>(getNavigationState(node))}),
     _inv_depth_bins(numDepthBins, 0.0f),
     _yaw_rate(0.0f),
     _forward_speed(0.0f),
@@ -83,6 +81,32 @@ public:
   }
 
 private:
+  std::string getName(rclcpp::Node & node)
+  {
+    node.declare_parameter<std::string>("mode_name", "Depth Seeker");
+    return node.get_parameter("mode_name").as_string();
+  }
+
+  static int getNavigationState(rclcpp::Node & node)
+  {
+    node.declare_parameter<std::string>("navigation_state", "ext1");
+    std::string nav_state_str = node.get_parameter("navigation_state").as_string();
+
+    // just allowing a couple of external modes for now
+    if (nav_state_str == "ext1") {
+      return px4_msgs::msg::VehicleStatus::NAVIGATION_STATE_EXTERNAL1;
+    } else if (nav_state_str == "ext2") {
+      return px4_msgs::msg::VehicleStatus::NAVIGATION_STATE_EXTERNAL2;
+    } else if (nav_state_str == "ext3") {
+      return px4_msgs::msg::VehicleStatus::NAVIGATION_STATE_EXTERNAL3;
+    } else {
+      RCLCPP_WARN(
+        node.get_logger(), "Unknown navigation state: %s, defaulting to EXTERNAL1",
+        nav_state_str.c_str());
+      return px4_msgs::msg::VehicleStatus::NAVIGATION_STATE_EXTERNAL1;
+    }
+  }
+
   void computeYawRate()
   {
     // avg of center and side bins

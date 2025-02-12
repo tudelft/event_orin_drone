@@ -278,16 +278,23 @@ If you want to run simulations with PX4 and Gazebo and ROS2:
 ### Testing external flight modes in simulation
 
 - Make sure containers, ROS, etc. are all built locally
-- Run [sim/px4_gazebo_sim_example.sh](sim/px4_gazebo_sim_example.sh) to start PX4 and Gazebo simulation
+- Run [sim/px4_gazebo_sim_external_modes.sh](sim/px4_gazebo_sim_external_modes.sh) to start PX4 and Gazebo simulation
     - If you don't end up with 4 tmux windows, something went wrong, so check the commands in normal terminals to see the error messages
+    - If there's something about timeout while waiting for FMU, increase the `sleep` in the script
+    - The sim might be very slow; if so, try disabling the image bridge in the script (then the corresponding depth seeker won't work of course)
 - You can connect a joystick with QGroundControl but it's not necessary, set up comms link to WSL as explained [here](https://docs.px4.io/main/en/dev_setup/dev_env_windows_wsl.html#qgroundcontrol-on-windows)
 - In the PX4 terminal:
-    - `commander status` to see if custom mode is registered
+    - `commander status` to see if custom modes are registered
     - `commander takeoff` to take off
-    - `commander mode ext1` to start the depth seeker, which should avoid the walls
+    - `commander mode ext1` to start the depth seeker based on a depth camera, which should avoid the walls
     - `commander mode auto:loiter` to hover again, or `commander mode posctl` to control using the sticks
-    - `commander mode ext1` to start flying a square autonomously
+    - `commander mode ext2` to start flying a square autonomously
 
-### Using a neural network for control
+### Using a neural network for estimation/control
 
-WIP
+- Same as above, but now the external control node takes the output of a Python node running a PyTorch neural network
+    - The network mimics a depth estimation network, taking an image and predicting a depth map
+    - It is untrained, however, so it won't work very well (just to illustrate the concept)
+- Run [sim/px4_gazebo_sim_network_control.sh](sim/px4_gazebo_sim_network_control.sh) to start PX4 and Gazebo simulation
+- In the PX4 terminal:
+    - `commander mode ext1` to start the depth seeker based on a depth estimation network, which shouldn't work well (because untrained)

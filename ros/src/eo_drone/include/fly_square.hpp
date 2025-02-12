@@ -60,23 +60,6 @@ public:
         const Eigen::Vector3f target_position_m =
           _current_position_m +
           px4_ros2::yawBodyToWorld(_current_heading_rad, Eigen::Vector3f{kSquareSide, 0.f, 0.f});
-
-        // if we deviate we want to rotate to the heading of the target
-        // const Eigen::Vector2f vehicle_to_target_xy = target_position_m.head(2)
-        // -
-        //   _vehicle_local_position->positionNed().head(2);
-        // const float heading_target_rad = atan2f(vehicle_to_target_xy(1),
-        // vehicle_to_target_xy(0));
-
-        // if (vehicle_to_target_xy.norm() < 0.1f) {
-        //   // stop caring about heading along the flight direction (the
-        //   arctangent becomes undefined)
-        //   // instead, to make the square a square, care about aligning with
-        //   starting heading _goto_setpoint->update(target_position_m,
-        //   _current_heading_rad);
-        // } else {
-        //   _goto_setpoint->update(target_position_m, heading_target_rad);
-        // }
         _goto_setpoint->update(target_position_m, _current_heading_rad);
 
         // we care about heading because to make the square a square
@@ -102,6 +85,26 @@ public:
   }
 
 private:
+  static int getNavigationState(rclcpp::Node & node)
+  {
+    node.declare_parameter<std::string>("navigation_state", "ext1");
+    std::string nav_state_str = node.get_parameter("navigation_state").as_string();
+
+    // just allowing a couple of external modes for now
+    if (nav_state_str == "ext1") {
+      return px4_msgs::msg::VehicleStatus::NAVIGATION_STATE_EXTERNAL1;
+    } else if (nav_state_str == "ext2") {
+      return px4_msgs::msg::VehicleStatus::NAVIGATION_STATE_EXTERNAL2;
+    } else if (nav_state_str == "ext3") {
+      return px4_msgs::msg::VehicleStatus::NAVIGATION_STATE_EXTERNAL3;
+    } else {
+      RCLCPP_WARN(
+        node.get_logger(), "Unknown navigation state: %s, defaulting to EXTERNAL1",
+        nav_state_str.c_str());
+      return px4_msgs::msg::VehicleStatus::NAVIGATION_STATE_EXTERNAL1;
+    }
+  }
+
   static constexpr float kSquareSide = 2.f;  // [m]
 
   enum class State {
