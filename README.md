@@ -1,5 +1,7 @@
 # Event-Orin drone
 
+![drone](pics/drone.png)
+
 Overview repository for the Event-Orin drone.
 
 ```bash
@@ -37,6 +39,12 @@ If a folder/link doesn't exist, there's nothing there (yet).
 Tested on:
 - Ubuntu 22.04 (WSL) on Windows 11 with NVIDIA GPU
 - Jetson Orin NX 16 GB with JetPack 6.0 and Jetson Linux 36.3
+
+## System overview
+
+![block diagram](pics/event_orin_drone_drawio-1.png)
+
+## Components
 
 ### FC
 
