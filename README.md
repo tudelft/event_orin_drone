@@ -30,6 +30,7 @@ ROS:
 
 Misc:
 - [scripts](#scripts): some useful scripts for real-world flight
+- [prints](#prints): 3D prints for the drone
 
 If a folder/link doesn't exist, there's nothing there (yet).
 
