@@ -3,7 +3,7 @@
 # define variables
 USB_UUID="209097E99097C3A6"
 MOUNT_POINT="/media/$USB_UUID"
-SOURCE_ITEMS=("/home/mavlab/mavlink_logs/*")  # list all files and folders to copy here
+SOURCE_ITEMS=("/home/mavlab/projects/event_orin_drone/ros/rosbags/*" "/home/mavlab/mavlink_logs/*")  # list all files and folders to copy here
 
 # check if the USB drive is already mounted
 MOUNTED=$(findmnt -rn -S UUID="$USB_UUID")

@@ -1,0 +1,16 @@
+# everything except torch stuff
+pip
+setuptools
+wheel
+packaging
+dotmap
+h5py
+hdf5plugin
+hydra-core
+lightning==2.4.*
+matplotlib
+numpy==1.*
+opencv-python
+pillow==10.*
+rich
+tensorboard
